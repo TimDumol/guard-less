@@ -60,7 +60,9 @@ module Guard
           else
             UI.info "Guard::Less: #{lessfile} -> #{cssfile}\n"
             FileUtils.mkdir_p(File.expand_path(destination))
-            compile(lessfile, cssfile)
+            unless compile(lessfile, cssfile)
+              throw :task_has_failed
+            end
           end
         end
       end
